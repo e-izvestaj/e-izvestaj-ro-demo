@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-Izveštaj România — Constatare amiabilă digitală</title>
+  <meta name="description" content="e-Izveštaj este un instrument digital pentru colectarea datelor, fotografiilor, locației GPS, schiței și semnăturilor după un accident rutier." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2f;
+      --card: rgba(255,255,255,0.08);
+      --card-border: rgba(255,255,255,0.13);
+      --text: #f6f8fb;
+      --muted: #aeb9c8;
+      --blue: #2477ff;
+      --red: #ff3f55;
+      --green: #2dd4bf;
+      --white: #ffffff;
+      --shadow: 0 24px 80px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(36,119,255,0.26), transparent 32%),
+        radial-gradient(circle at top right, rgba(255,63,85,0.22), transparent 30%),
+        linear-gradient(180deg, #07111f 0%, #0a1425 45%, #07111f 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .brand-logo {
+      height: 72px;
+      width: auto;
+      display: block;
+    }
+
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: #ffffff;
+      border-bottom: 1px solid rgba(15,45,92,0.10);
+      box-shadow: 0 10px 30px rgba(15,45,92,0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 82px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 22px;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: conic-gradient(from 140deg, var(--blue), var(--blue) 43%, #fff 43%, #fff 47%, var(--red) 47%, var(--red));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(36,119,255,0.22);
+    }
+
+    .logo-mark span {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(7,17,31,0.92);
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #0f2d5c;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      transition: transform .18s ease, background .18s ease, border .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,0.13); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #1457d9);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 18px 42px rgba(36,119,255,0.28);
+    }
+
+    .btn-primary:hover { background: linear-gradient(135deg, #3182ff, #155eea); }
+
+    .hero {
+      padding: 82px 0 58px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      color: #dce6f5;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: .95;
+      margin: 0 0 22px;
+      letter-spacing: -0.065em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, #9cc2ff 46%, #ff9aa7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 22px);
+      max-width: 650px;
+      margin: 0 0 28px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 22px; }
+
+    .microcopy { color: var(--green); font-size: 18px; margin: 0; }
+
+    .phone-card {
+      position: relative;
+      border-radius: 42px;
+      padding: 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .phone-screen {
+      border-radius: 32px;
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 22px;
+      min-height: 540px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .app-title { font-weight: 900; font-size: 20px; letter-spacing: -0.04em; }
+
+    .pill { font-size: 12px; font-weight: 800; color: #075985; background: #e0f2fe; padding: 7px 10px; border-radius: 999px; }
+
+    .step-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 26px rgba(15,23,42,0.08);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 13px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .step-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .step-icon.blue { background: var(--blue); }
+    .step-icon.red { background: var(--red); }
+    .step-icon.green { background: var(--green); color: #042f2e; }
+
+    .step-card strong { display: block; font-size: 15px; }
+    .step-card span { color: #64748b; font-size: 13px; }
+
+    .pdf-preview {
+      position: absolute;
+      right: -26px;
+      bottom: -32px;
+      width: 230px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(15,23,42,0.18);
+      padding: 14px;
+      transform: rotate(-5deg);
+    }
+
+    .pdf-line { height: 8px; border-radius: 99px; background: #e2e8f0; margin: 8px 0; }
+    .pdf-line.short { width: 60%; }
+    .pdf-box { height: 58px; border-radius: 12px; border: 2px dashed #cbd5e1; margin-top: 12px; }
+
+    section { padding: 70px 0; }
+
+    .section-head { max-width: 760px; margin-bottom: 34px; }
+    .eyebrow { color: var(--green); font-weight: 900; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+    h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1.05; margin: 10px 0 14px; letter-spacing: -0.045em; }
+    .section-head p { color: var(--muted); font-size: 18px; margin: 0; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 26px;
+      min-height: 230px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+    }
+
+    .card h3 { margin: 0 0 10px; font-size: 22px; letter-spacing: -0.03em; }
+    .card p { margin: 0; color: var(--muted); }
+    .card .num { font-size: 38px; font-weight: 900; letter-spacing: -0.06em; color: #fff; opacity: .9; margin-bottom: 22px; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .feature-list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #d7e0ec;
+      font-weight: 600;
+    }
+    .check { color: var(--green); font-weight: 900; }
+
+    .dark-panel {
+      background: linear-gradient(145deg, rgba(36,119,255,0.18), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 34px;
+      padding: 34px;
+    }
+
+    .cta {
+      padding: 86px 0;
+    }
+
+    .cta-box {
+      text-align: center;
+      border-radius: 42px;
+      padding: 54px 28px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(36,119,255,0.35), transparent 36%),
+        radial-gradient(circle at 80% 20%, rgba(255,63,85,0.28), transparent 36%),
+        rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 { margin-top: 0; }
+    .cta-box p { color: var(--muted); font-size: 18px; max-width: 720px; margin: 0 auto 26px; }
+
+    footer {
+      padding: 34px 0 46px;
+      color: #7f8fa8;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .disclaimer {
+      margin-top: 18px;
+      color: #77869c;
+      font-size: 13px;
+      max-width: 900px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding-top: 54px; }
+      .phone-screen { min-height: 490px; }
+    }
+
+    @media (max-width: 520px) {
+      .container { width: min(100% - 22px, 1120px); }
+      .brand { font-size: 19px; }
+      .brand-logo { height: 58px; }
+      h1 { font-size: 44px; }
+      .lead { font-size: 17px; }
+      .hero-actions .btn { width: 100%; }
+      .phone-card { border-radius: 30px; padding: 10px; }
+      .phone-screen { border-radius: 24px; padding: 16px; }
+      section { padding: 52px 0; }
+      .card, .dark-panel { padding: 22px; border-radius: 24px; }
+      .pdf-preview { width: 195px; }
+    }
+  
+    #vozaci,
+    #osiguravaci,
+    #kako-radi {
+      scroll-margin-top: 100px;
+    }
+
+  
+    .install-help-link {
+      display: inline-flex;
+      margin-top: 10px;
+      color: #9cc2ff;
+      font-weight: 800;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .install-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(3, 10, 22, 0.72);
+      backdrop-filter: blur(10px);
+    }
+
+    .install-modal.is-open {
+      display: flex;
+    }
+
+    .install-modal-card {
+      position: relative;
+      width: min(720px, 100%);
+      max-height: min(86vh, 760px);
+      overflow-y: auto;
+      border-radius: 28px;
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+      padding: 34px;
+    }
+
+    .install-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid #dbe3ef;
+      background: #f8fafc;
+      color: #0f2d5c;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .install-modal-card h2 {
+      color: #0f2d5c;
+      margin: 0 52px 12px 0;
+      font-size: clamp(26px, 4vw, 38px);
+    }
+
+    .install-modal-card p {
+      color: #475569;
+      margin: 0 0 22px;
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .install-box {
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 20px;
+      background: #f8fafc;
+    }
+
+    .install-box h3 {
+      margin: 0 0 12px;
+      color: #0f2d5c;
+      font-size: 20px;
+    }
+
+    .install-box ol {
+      margin: 0;
+      padding-left: 20px;
+      color: #334155;
+    }
+
+    .install-box li {
+      margin: 8px 0;
+    }
+
+    @media (max-width: 720px) {
+      .install-modal {
+        align-items: flex-end;
+        padding: 12px;
+      }
+
+      .install-modal-card {
+        border-radius: 24px 24px 18px 18px;
+        padding: 28px 20px 22px;
+        max-height: 88vh;
+      }
+
+      .install-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  
+    .mobile-menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(15,45,92,0.14);
+      border-radius: 14px;
+      background: #f8fafc;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .mobile-menu-toggle span {
+      width: 22px;
+      height: 2px;
+      border-radius: 999px;
+      background: #0f2d5c;
+      display: block;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: sticky;
+      top: 82px;
+      z-index: 49;
+      background: #ffffff;
+      border-bottom: 1px solid rgba(15,45,92,0.10);
+      box-shadow: 0 14px 28px rgba(15,45,92,0.08);
+      padding: 10px 16px 16px;
+    }
+
+    .mobile-menu.is-open {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-menu a {
+      color: #0f2d5c;
+      font-weight: 800;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--blue);
+      background: #eef5ff;
+    }
+
+    @media (max-width: 900px) {
+      .mobile-menu-toggle {
+        display: inline-flex;
+      }
+
+      .nav {
+        gap: 12px;
+      }
+
+      .nav-cta {
+        min-height: 44px;
+        padding: 0 16px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .mobile-menu {
+        top: 82px;
+      }
+    }
+
+  
+    @media (max-width: 900px) {
+      .nav {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand {
+        justify-self: start;
+      }
+
+      .nav-cta {
+        justify-self: center;
+        grid-column: 2;
+        grid-row: 1;
+        min-height: 44px;
+        padding: 0 16px;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .mobile-menu-toggle {
+        justify-self: end;
+        grid-column: 3;
+        grid-row: 1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav {
+        grid-template-columns: auto 1fr auto;
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        min-height: 36px;
+        padding: 0 10px;
+        font-size: 12px;
+      }
+
+      .brand-logo {
+        height: 54px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="e-Izveštaj - pagina principală">
+        <img src="logo.png" alt="e-Izveštaj" class="brand-logo">
+      </a>
+      <nav class="nav-links" aria-label="Navigație principală">
+        <a href="#vozaci">Pentru conducători auto</a>
+        <a href="#osiguravaci">Pentru asigurători</a>
+        <a href="#kako-radi">Cum funcționează</a>
+        <a href="app/" >Aplicație</a>
+      </nav>
+      <button class="mobile-menu-toggle" type="button" aria-label="Deschide meniul" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="btn btn-primary nav-cta" href="app/" >Deschide aplicația</a>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#vozaci">Pentru conducători auto</a>
+    <a href="#osiguravaci">Pentru asigurători</a>
+    <a href="#kako-radi">Cum funcționează</a>
+    <a href="app/" >Aplicație</a>
+  </div>
+
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">Constatare digitală a accidentului rutier</div>
+          <h1>Toate informațiile despre accident.<br><span class="gradient-text">Într-un singur loc.</span></h1>
+          <p class="lead">e-Izveštaj îi ghidează pe cei doi conducători prin introducerea datelor, fotografiilor, locației GPS, schiței și semnăturilor. La final se generează un PDF pregătit pentru transmitere participanților și asigurătorului.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="app/" >Pornește aplicația</a>
+            <a class="btn" href="demo-bucuresti.html">Vezi demo București</a>
+            <a class="btn" href="#osiguravaci">Pentru asigurători</a>
+          </div>
+          <p class="microcopy">Confidențialitatea este prioritară. Datele sunt procesate local pe telefon și nu sunt stocate pe serverele e-Izveštaj.</p>
+          
+        </div>
+
+        <div class="phone-card" aria-label="Previzualizare aplicație e-Izveštaj">
+          <div class="phone-screen">
+            <div class="app-top">
+              <div class="app-title">e-Izveštaj</div>
+              <div class="pill">PWA</div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-icon blue">1</div>
+              <div><strong>Locație și oră</strong><span>Coordonate GPS și marcaj temporal</span></div>
+            </div>
+            <div class="step-card">
+              <div class="step-icon red">2</div>
+              <div><strong>Datele participanților</strong><span>Conducătorii A și B semnează digital</span></div>
+            </div>
+            <div class="step-card">
+              <div class="step-icon green">3</div>
+              <div><strong>Fotografii și schiță</strong><span>Avarii, documente și schiță pe harta GPS</span></div>
+            </div>
+            <div class="step-card">
+              <div class="step-icon blue">4</div>
+              <div><strong>Constatare PDF</strong><span>Un singur document pentru toți</span></div>
+            </div>
+
+            <div class="pdf-preview" aria-hidden="true">
+              <strong>Constatare PDF</strong>
+              <div class="pdf-line"></div>
+              <div class="pdf-line short"></div>
+              <div class="pdf-line"></div>
+              <div class="pdf-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vozaci">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Pentru conducători auto</div>
+          <h2>Un ghid simplu într-o situație neplăcută.</h2>
+          <p>În cazul unui accident ușor, aplicația elimină nevoia de a căuta formularul pe hârtie și îi conduce pe ambii participanți prin același proces.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>Fără căutarea formularului</h3>
+            <p>Conducătorul deschide aplicația pe telefon și parcurge pașii de completare.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>Dovezi într-un singur loc</h3>
+            <p>Fotografiile, locația GPS, ora, schița și semnăturile rămân asociate aceleiași constatări digitale.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>PDF gata de trimis</h3>
+            <p>La final, ambii participanți primesc același document, pe care îl pot transmite asigurătorului.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="osiguravaci">
+      <div class="container split">
+        <div class="dark-panel">
+          <div class="eyebrow">Pentru asigurători</div>
+          <h2>Intrare digitală FNOL pentru daune auto.</h2>
+          <p class="lead">e-Izveštaj poate deveni primul strat digital al notificării de daună: date structurate, mai puțină introducere manuală și documentație mai completă de la început.</p>
+        </div>
+        <div class="dark-panel">
+          <h3>Beneficii potențiale</h3>
+          <ul class="feature-list">
+            <li><span class="check">✓</span><span>Recepție și procesare mai rapidă a documentelor</span></li>
+            <li><span class="check">✓</span><span>GPS, marcaj temporal și fotografii asociate dosarului</span></li>
+            <li><span class="check">✓</span><span>Mai puține erori în datele participanților</span></li>
+            <li><span class="check">✓</span><span>Posibilitate de integrare cu sistemele asigurătorului</span></li>
+            <li><span class="check">✓</span><span>Experiență mai bună pentru asigurați</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="kako-radi">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Cum funcționează</div>
+          <h2>Un proces. Doi participanți. Un PDF.</h2>
+          <p>Aplicația funcționează ca PWA, fără instalare din magazin și fără a ocupa spațiu ca o aplicație clasică. Poate fi deschisă direct și adăugată pe ecranul principal.</p>
+          <button class="install-help-link" type="button" data-install-open>
+            📱 Cum adaugi e-Izveštaj pe ecranul principal?
+          </button>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>1. Deschiderea cazului</h3>
+            <p>Se înregistrează ora, locația GPS și contextul de bază al accidentului.</p>
+          </article>
+          <article class="card">
+            <h3>2. Documentare</h3>
+            <p>Se adaugă fotografii ale documentelor și ale avariilor ambelor vehicule.</p>
+          </article>
+          <article class="card">
+            <h3>3. Schimb de date</h3>
+            <p>Participanții A și B își introduc datele, cu opțiune de transfer prin QR.</p>
+          </article>
+          <article class="card">
+            <h3>4. Schiță pe harta GPS</h3>
+            <p>Poziția vehiculelor, direcția de deplasare și punctul de contact sunt marcate direct pe harta GPS.</p>
+          </article>
+          <article class="card">
+            <h3>5. Semnături</h3>
+            <p>Ambii participanți confirmă datele prin semnătură electronică pe ecran.</p>
+          </article>
+          <article class="card">
+            <h3>6. Documente pregătite pentru asigurător</h3>
+            <p>La final, ambii participanți primesc același document și fotografiile anexate.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Când se produce un accident, timpul contează.</h2>
+          <p>Pregătește-te înainte să ai nevoie. Salvează e-Izveštaj pe telefon pentru a-l avea la îndemână.</p>
+          <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+            <a class="btn btn-primary" href="app/" >Deschide aplicația</a>
+            <a class="btn" href="mailto:kontakt@e-izvestaj.rs">Contact pentru colaborare</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>© 2026 e-Izveštaj · Part of the AutoPulse ecosystem</div>
+        <div><a href="app/" >Pornește aplicația</a></div>
+      </div>
+      <p class="disclaimer">Notă: e-Izveštaj este un instrument pentru colectarea digitală a datelor și generarea documentației privind un accident rutier. Nu reprezintă consultanță juridică și nu garantează acceptarea documentelor de către un asigurător sau o instituție fără acordul acestora.</p>
+    </div>
+  </footer>
+
+  <div class="install-modal" id="installModal" aria-hidden="true">
+    <div class="install-modal-card" role="dialog" aria-modal="true" aria-labelledby="installModalTitle">
+      <button class="install-modal-close" type="button" data-install-close aria-label="Închide">×</button>
+      <h2 id="installModalTitle">Cum adaugi e-Izveštaj pe ecranul principal?</h2>
+      <p>e-Izveštaj este o aplicație PWA. Nu trebuie instalată din magazin; o poți salva ca scurtătură pe telefon.</p>
+
+      <div class="install-grid">
+        <div class="install-box">
+          <h3>iPhone / iOS Safari</h3>
+          <ol>
+            <li>Deschide aplicația în Safari.</li>
+            <li>Apasă pictograma <strong>Share</strong>.</li>
+            <li>Alege <strong>Add to Home Screen</strong>.</li>
+            <li>Confirmă cu <strong>Add</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="install-box">
+          <h3>Android / Chrome</h3>
+          <ol>
+            <li>Deschide aplicația în Chrome.</li>
+            <li>Apasă meniul cu trei puncte.</li>
+            <li>Alege <strong>Add to Home screen</strong> sau <strong>Install app</strong>.</li>
+            <li>Confirmă instalarea/scurtătura.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const modal = document.getElementById('installModal');
+      const openButtons = document.querySelectorAll('[data-install-open]');
+      const closeButtons = document.querySelectorAll('[data-install-close]');
+
+      function openModal() {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      openButtons.forEach(button => button.addEventListener('click', openModal));
+      closeButtons.forEach(button => button.addEventListener('click', closeModal));
+
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    })();
+  </script>
+
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+
+      if (!toggle || !menu) return;
+
+      function closeMenu() {
+        menu.classList.remove('is-open');
+        menu.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      function toggleMenu() {
+        const isOpen = menu.classList.toggle('is-open');
+        menu.setAttribute('aria-hidden', String(!isOpen));
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      }
+
+      toggle.addEventListener('click', toggleMenu);
+
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 900) closeMenu();
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
+
+</body>
+</html>
+

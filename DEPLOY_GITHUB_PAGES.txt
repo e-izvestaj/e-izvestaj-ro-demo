@@ -1,0 +1,12 @@
+e-Izvestaj Romania DEMO
+
+1. Kreirati NOVI GitHub repo (npr. e-izvestaj-ro-demo).
+2. Uploadovati SADRZAJ ovog foldera u root repozitorijuma.
+3. Settings > Pages > Deploy from a branch > main / root.
+4. Otvoriti GitHub Pages URL repozitorijuma.
+
+VAZNO:
+- Ovo je odvojena RO demo kopija. Production e-izvestaj.rs se ne dira.
+- Demo scenario: RO-DEMO-001, Bucuresti.
+- Svi dokumenti/podaci u demo slucaju su fiktivni i oznaceni DEMO.
+- app/ je prilagodjen za GitHub Pages poddirektorijum (relativni asseti + dinamicki React basename).
