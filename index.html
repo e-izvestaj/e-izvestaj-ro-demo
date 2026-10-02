@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" translate="no">
 <head>
   <meta charset="UTF-8" />
+  <meta name="google" content="notranslate" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>e-Izveštaj România — Constatare amiabilă digitală</title>
-  <meta name="description" content="e-Izveštaj este un instrument digital pentru colectarea datelor, fotografiilor, locației GPS, schiței și semnăturilor după un accident rutier." />
+  <title>e-Raport România — Constatare amiabilă digitală</title>
+  <meta name="description" content="e-Raport este un instrument digital pentru colectarea datelor, fotografiilor, locației GPS, schiței și semnăturilor după un accident rutier." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -46,6 +47,39 @@
       width: auto;
       display: block;
     }
+
+    .brand-lockup {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 92px;
+      line-height: 1;
+    }
+    .brand-mark-crop {
+      display: block;
+      width: 64px;
+      height: 46px;
+      overflow: hidden;
+      position: relative;
+    }
+    .brand-mark-crop img {
+      position: absolute;
+      width: 74px;
+      height: 74px;
+      max-width: none;
+      left: 50%;
+      top: -1px;
+      transform: translateX(-50%);
+    }
+    .brand-wordmark {
+      margin-top: 2px;
+      color: #2d3441;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.03em;
+    }
+    .brand-wordmark .brand-e { color: #2477ff; }
 
 
     .container {
@@ -622,8 +656,11 @@
 <body>
   <header>
     <div class="container nav">
-      <a href="#top" class="brand" aria-label="e-Izveštaj - pagina principală">
-        <img src="logo.png" alt="e-Izveštaj" class="brand-logo">
+      <a href="#top" class="brand" aria-label="e-Raport - pagina principală">
+        <span class="brand-lockup" aria-label="e-Raport">
+          <span class="brand-mark-crop"><img src="logo.png" alt="" aria-hidden="true"></span>
+          <span class="brand-wordmark"><span class="brand-e">e</span>-Raport</span>
+        </span>
       </a>
       <nav class="nav-links" aria-label="Navigație principală">
         <a href="#vozaci">Pentru conducători auto</a>
@@ -654,20 +691,20 @@
         <div>
           <div class="badge">Constatare digitală a accidentului rutier</div>
           <h1>Toate informațiile despre accident.<br><span class="gradient-text">Într-un singur loc.</span></h1>
-          <p class="lead">e-Izveštaj îi ghidează pe cei doi conducători prin introducerea datelor, fotografiilor, locației GPS, schiței și semnăturilor. La final se generează un PDF pregătit pentru transmitere participanților și asigurătorului.</p>
+          <p class="lead">e-Raport îi ghidează pe cei doi conducători prin introducerea datelor, fotografiilor, locației GPS, schiței și semnăturilor. La final se generează un PDF pregătit pentru transmitere participanților și asigurătorului.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="app/" >Pornește aplicația</a>
             <a class="btn" href="demo-bucuresti.html">Vezi demo București</a>
             <a class="btn" href="#osiguravaci">Pentru asigurători</a>
           </div>
-          <p class="microcopy">Confidențialitatea este prioritară. Datele sunt procesate local pe telefon și nu sunt stocate pe serverele e-Izveštaj.</p>
+          <p class="microcopy">Confidențialitatea este prioritară. Datele sunt procesate local pe telefon și nu sunt stocate pe serverele e-Raport.</p>
           
         </div>
 
-        <div class="phone-card" aria-label="Previzualizare aplicație e-Izveštaj">
+        <div class="phone-card" aria-label="Previzualizare aplicație e-Raport">
           <div class="phone-screen">
             <div class="app-top">
-              <div class="app-title">e-Izveštaj</div>
+              <div class="app-title">e-Raport</div>
               <div class="pill">PWA</div>
             </div>
 
@@ -732,7 +769,7 @@
         <div class="dark-panel">
           <div class="eyebrow">Pentru asigurători</div>
           <h2>Intrare digitală FNOL pentru daune auto.</h2>
-          <p class="lead">e-Izveštaj poate deveni primul strat digital al notificării de daună: date structurate, mai puțină introducere manuală și documentație mai completă de la început.</p>
+          <p class="lead">e-Raport poate deveni primul strat digital al notificării de daună: date structurate, mai puțină introducere manuală și documentație mai completă de la început.</p>
         </div>
         <div class="dark-panel">
           <h3>Beneficii potențiale</h3>
@@ -754,7 +791,7 @@
           <h2>Un proces. Doi participanți. Un PDF.</h2>
           <p>Aplicația funcționează ca PWA, fără instalare din magazin și fără a ocupa spațiu ca o aplicație clasică. Poate fi deschisă direct și adăugată pe ecranul principal.</p>
           <button class="install-help-link" type="button" data-install-open>
-            📱 Cum adaugi e-Izveštaj pe ecranul principal?
+            📱 Cum adaugi e-Raport pe ecranul principal?
           </button>
         </div>
         <div class="cards">
@@ -790,7 +827,7 @@
       <div class="container">
         <div class="cta-box">
           <h2>Când se produce un accident, timpul contează.</h2>
-          <p>Pregătește-te înainte să ai nevoie. Salvează e-Izveštaj pe telefon pentru a-l avea la îndemână.</p>
+          <p>Pregătește-te înainte să ai nevoie. Salvează e-Raport pe telefon pentru a-l avea la îndemână.</p>
           <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
             <a class="btn btn-primary" href="app/" >Deschide aplicația</a>
             <a class="btn" href="mailto:kontakt@e-izvestaj.rs">Contact pentru colaborare</a>
@@ -803,18 +840,18 @@
   <footer>
     <div class="container">
       <div class="footer-row">
-        <div>© 2026 e-Izveštaj · Part of the AutoPulse ecosystem</div>
+        <div>© 2026 e-Raport · Part of the AutoPulse ecosystem</div>
         <div><a href="app/" >Pornește aplicația</a></div>
       </div>
-      <p class="disclaimer">Notă: e-Izveštaj este un instrument pentru colectarea digitală a datelor și generarea documentației privind un accident rutier. Nu reprezintă consultanță juridică și nu garantează acceptarea documentelor de către un asigurător sau o instituție fără acordul acestora.</p>
+      <p class="disclaimer">Notă: e-Raport este un instrument pentru colectarea digitală a datelor și generarea documentației privind un accident rutier. Nu reprezintă consultanță juridică și nu garantează acceptarea documentelor de către un asigurător sau o instituție fără acordul acestora.</p>
     </div>
   </footer>
 
   <div class="install-modal" id="installModal" aria-hidden="true">
     <div class="install-modal-card" role="dialog" aria-modal="true" aria-labelledby="installModalTitle">
       <button class="install-modal-close" type="button" data-install-close aria-label="Închide">×</button>
-      <h2 id="installModalTitle">Cum adaugi e-Izveštaj pe ecranul principal?</h2>
-      <p>e-Izveštaj este o aplicație PWA. Nu trebuie instalată din magazin; o poți salva ca scurtătură pe telefon.</p>
+      <h2 id="installModalTitle">Cum adaugi e-Raport pe ecranul principal?</h2>
+      <p>e-Raport este o aplicație PWA. Nu trebuie instalată din magazin; o poți salva ca scurtătură pe telefon.</p>
 
       <div class="install-grid">
         <div class="install-box">

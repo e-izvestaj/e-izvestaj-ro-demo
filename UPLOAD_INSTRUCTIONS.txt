@@ -1,0 +1,18 @@
+EIZVESTAJ RO - PHASE 2 DEMO PATCH
+
+Zameni/otpremi u root GitHub repozitorijuma:
+- index.html
+- demo-bucuresti.html
+- logo.png (isti izvorni logo, koristi se samo pictogram crop)
+- demo-assets/ (ceo folder)
+
+App folder iz Faze 1 se NE dira.
+
+Promene:
+- e-Izveštaj -> e-Raport kroz landing stranu
+- header logo prikazuje postojeći znak + HTML wordmark e-Raport
+- Chrome translate prompt isključen za landing/demo
+- București demo izgleda i ponaša se kao mobilna app
+- 16 ekrana: safety, GPS/lokacija, dokumentacija, A, RCA A, okolnosti, skica, QR B, B, RCA B, review, potpisi, final PDF
+- polja se automatski popunjavaju; postoji Auto demo i ručni Next/Back
+- koristi postojeće fiktivne RO-DEMO-001 vizuale i PDF
